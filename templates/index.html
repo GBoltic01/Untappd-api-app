@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?new1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}?new1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js" integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    
+    <h1>Beer Search App</h1>
+
+    <form action="/" method="post">
+        <div>
+            <input type="text" name="brewery_entry" placeholder="Enter brewery name...">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <br>
+
+    <table>
+        <tr>
+            <th>Brewery: </th>
+            <td>{{ name }}</td>
+        </tr>
+        <tr>
+            <th>Location: </th>
+            <td>{{ city }}{{ country }}</td>
+        </tr>
+        <tr>
+            <th>Untappd: </th>
+            <td><a target="_blank" href={{ untappd_url }}>{{ untappd_url }}</a></td>
+        </tr>
+        <tr>
+            <th>Number of beers: </th>
+            <td>{{ beer_nr }}</td>
+        </tr>
+    </table>
+    <br>
+
+    <p>Stout/Porter count: {{ dark_count }}</p>
+    <p>IPA count: {{ ipa_count }}</p>
+    <p>Pale Ale count: {{ pale_ale_count }}</p>
+    <p>Lager count: {{ lager_count }}</p>
+    <p>Belgian count: {{ belgian_count }}</p>
+    <p>Sour count: {{ sour_count }}</p>
+    <p>Other: {{ other_all }}</p>
+
+
+    <canvas id="lineChart" height="400" width="400"></canvas>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
+</body>
+</html>
