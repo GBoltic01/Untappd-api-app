@@ -3,7 +3,8 @@ import requests
 import json
 import os
 
-api_endpoint = os.environ.get("UNTAPPD_API_KEY")
+api_endpoint = str(os.environ.get("UNTAPPD_API_KEY"))
+print(api_endpoint)
 
 # Recursive function to extract specific values of a key in JSON tree
 

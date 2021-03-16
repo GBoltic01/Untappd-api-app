@@ -8,6 +8,7 @@
     <meta name="author" content="SitePoint">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?new1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}?new1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js" integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA==" crossorigin="anonymous"></script>
@@ -20,9 +21,9 @@
     
     <h1>Beer Search App</h1>
 
-    <form action="/" method="post">
+    <form id="submit-form" action="/" method="post">
         <div>
-            <input type="text" name="brewery_entry" placeholder="Enter brewery name...">
+            <input type="text" name="brewery_entry" placeholder="Enter brewery name">
             <button type="submit">Submit</button>
         </div>
     </form>
@@ -48,16 +49,50 @@
     </table>
     <br>
 
-    <p>Stout/Porter count: {{ dark_count }}</p>
-    <p>IPA count: {{ ipa_count }}</p>
-    <p>Pale Ale count: {{ pale_ale_count }}</p>
-    <p>Lager count: {{ lager_count }}</p>
-    <p>Belgian count: {{ belgian_count }}</p>
-    <p>Sour count: {{ sour_count }}</p>
-    <p>Other: {{ other_all }}</p>
 
 
-    <canvas id="lineChart" height="400" width="400"></canvas>   
+    <canvas id="mainChart" height="400" width="400"></canvas>   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
+    <script>
+        
+            // Render the whole new page after POST return. Remove top left text (brewery info)- only search bar on the start page, after post request processed- 
+            // render new page with chart and brewery information.
+            
+            var mainChart = document.getElementById("mainChart").getContext('2d');
+            
+            Chart.defaults.global.defaultFontFamily = 'Helvetica';
+            Chart.defaults.global.defaultFontSize = 18;
+
+            var colorPalette = ['#e9481c','#f5751c','#d15e0e','#2d4866','#213651','#17283c','#797983']
+            var beerCount = ['{{ ipa_count }}', '{{ pale_ale_count }}', '{{ sour_count }}', '{{ belgian_count }}', '{{ lager_count }}', '{{ dark_count }}', '{{ other_all }}']
+
+            var beerChart = new Chart(mainChart, {
+                type:'doughnut',
+                data: {
+                    labels: ['IPA', 'Pale Ale', 'Sour', 'Belgian', 'Lager', 'Stout/Porter', 'Other'],
+                    datasets: [{
+                        label: 'Beer style',
+                        data: beerCount,
+                        backgroundColor: colorPalette,
+                        borderWidth: 2,
+                        borderColor: 'white',
+                        hoverBorderWidth: 6,
+                        hoverBorderColor: 'white'
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Beer styles by brewery',
+                        fontSize: 26
+                    },
+                    animation: {
+                        animateScale: true
+                    }
+                }
+            });
+      
+
+    </script> 
 </body>
 </html>
