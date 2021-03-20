@@ -6,9 +6,20 @@
 
     <meta name="description" content="The HTML5 Herald">
     <meta name="author" content="SitePoint">
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?new1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}?new1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/searchbar.css') }}?nwqqjke22">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js" integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA==" crossorigin="anonymous"></script>
@@ -17,53 +28,63 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
 </head>
 
-<body>
-    
-    <h1>Beer Search App</h1>
+<body style="background-color:#e3ded3">
 
-    <form id="submit-form" action="/" method="post">
-        <div>
-            <input type="text" name="brewery_entry" placeholder="Enter brewery name">
-            <button type="submit">Submit</button>
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <form class="searchbar" id="submit-form" action="/" method="post" style="text-align:center">
+                <div>
+                    <input class="searchbar" type="text" name="brewery_entry" placeholder="Enter brewery name">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
     <br>
+    <div class="containter">
+        <div class="row">
+            <div class="col-md">
+                <table>
+                    <tr>
+                        <th>Brewery: </th>
+                        <td>{{ name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Location: </th>
+                        <td>{{ city }}{{ country }}</td>
+                    </tr>
+                    <tr>
+                        <th>Untappd: </th>
+                        <td><a target="_blank" href={{ untappd_url }}>{{ untappd_url }}</a></td>
+                    </tr>
+                    <tr>
+                        <th>Number of beers: </th>
+                        <td>{{ beer_nr }}</td>
+                    </tr>
+                </table>
+            </div>
 
-    <table>
-        <tr>
-            <th>Brewery: </th>
-            <td>{{ name }}</td>
-        </tr>
-        <tr>
-            <th>Location: </th>
-            <td>{{ city }}{{ country }}</td>
-        </tr>
-        <tr>
-            <th>Untappd: </th>
-            <td><a target="_blank" href={{ untappd_url }}>{{ untappd_url }}</a></td>
-        </tr>
-        <tr>
-            <th>Number of beers: </th>
-            <td>{{ beer_nr }}</td>
-        </tr>
-    </table>
-    <br>
+            <div class="col-md">
+                <canvas id="mainChart" style="height: 600px; width:100%"></canvas>
+            </div>
+        </div>
+        <div id="mapid" style="position:absolute; width:100%; height:20%; bottom:0"></div>
+    </div>
+    
 
-
-
-    <canvas id="mainChart" height="400" width="400"></canvas>   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
     <script>
         
-            // Render the whole new page after POST return. Remove top left text (brewery info)- only search bar on the start page, after post request processed- 
-            // render new page with chart and brewery information.
+        // Render the whole new page after POST return. Remove top left text (brewery info)- only search bar on the start page, after post request processed- 
+        // render new page with chart and brewery information.
+        
             
             var mainChart = document.getElementById("mainChart").getContext('2d');
             
             Chart.defaults.global.defaultFontFamily = 'Helvetica';
-            Chart.defaults.global.defaultFontSize = 18;
+            Chart.defaults.global.defaultFontSize = 14;
 
-            var colorPalette = ['#e9481c','#f5751c','#d15e0e','#2d4866','#213651','#17283c','#797983']
+            var colorPalette = ['#d15e0e', '#f5751c', '#d6603a', '#2d4866', '#213651', '#17283c', '#797983']
             var beerCount = ['{{ ipa_count }}', '{{ pale_ale_count }}', '{{ sour_count }}', '{{ belgian_count }}', '{{ lager_count }}', '{{ dark_count }}', '{{ other_all }}']
 
             var beerChart = new Chart(mainChart, {
@@ -81,16 +102,25 @@
                     }]
                 },
                 options: {
+                    responsive: false,
                     title: {
                         display: true,
-                        text: 'Beer styles by brewery',
-                        fontSize: 26
+                        text: 'Beer styles',
+                        fontSize: 20
                     },
                     animation: {
-                        animateScale: true
+                        animateScale: false
                     }
                 }
             });
+        
+
+            var mymap = L.map('mapid').setView([46.545813, 15.514569], 14);
+
+            L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            }).addTo(mymap)
       
 
     </script> 

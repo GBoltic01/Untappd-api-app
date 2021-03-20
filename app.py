@@ -4,7 +4,6 @@ import json
 import os
 
 api_endpoint = str(os.environ.get("UNTAPPD_API_KEY"))
-print(api_endpoint)
 
 # Recursive function to extract specific values of a key in JSON tree
 
@@ -45,7 +44,7 @@ def index():
         brewery_response = requests.get(brewery_url, params=brewery_params)
         brewery_json = brewery_response.json()
 
-        beer_url = 'https://api.untappd.com/v4/search/beer?q={}&' + api_endpoint   
+        beer_url = 'https://api.untappd.com/v4/search/beer?q={}&limit=50&' + api_endpoint   
         beer_params = {'q': brewery}  
         beer_response = requests.get(beer_url, params=beer_params)   
         beer_1 = beer_response.json()
@@ -56,8 +55,16 @@ def index():
         city = brewery_json['response']['brewery']['items'][0]['brewery']['location']['brewery_city'] + ', '
         country = brewery_json['response']['brewery']['items'][0]['brewery']['country_name']
         beer_nr = brewery_json['response']['brewery']['items'][0]['brewery']['beer_count']
-        untappd_url = 'untappd.com' + brewery_json['response']['brewery']['items'][0]['brewery']['brewery_page_url']
+        untappd_url = 'www.untappd.com' + brewery_json['response']['brewery']['items'][0]['brewery']['brewery_page_url']
         beer_styles = json_extract(beer_1, 'beer_style')
+
+        brewery_dictionary = {
+            'name': name,
+            'city': city,
+            'country': country,
+            'beer_nr': beer_nr,
+            'untapd_url': untappd_url 
+        }
 
         # Create filter/count criteria 
 
