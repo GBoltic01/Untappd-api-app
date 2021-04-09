@@ -49,6 +49,7 @@ def index():
         beer_response = requests.get(beer_url, params=beer_params)   
         beer_1 = beer_response.json()
 
+
         # Extract relevant data from JSON
 
         name = brewery_json['response']['brewery']['items'][0]['brewery']['brewery_name']
@@ -56,15 +57,11 @@ def index():
         country = brewery_json['response']['brewery']['items'][0]['brewery']['country_name']
         beer_nr = brewery_json['response']['brewery']['items'][0]['brewery']['beer_count']
         untappd_url = 'www.untappd.com' + brewery_json['response']['brewery']['items'][0]['brewery']['brewery_page_url']
+        latitude = brewery_json['response']['brewery']['items'][0]['brewery']['location']['lat']
+        longitude = brewery_json['response']['brewery']['items'][0]['brewery']['location']['lng']
         beer_styles = json_extract(beer_1, 'beer_style')
 
-        brewery_dictionary = {
-            'name': name,
-            'city': city,
-            'country': country,
-            'beer_nr': beer_nr,
-            'untapd_url': untappd_url 
-        }
+        most_popular_beer = beer_1['response']['beers']['items'][0]['beer']['beer_name']
 
         # Create filter/count criteria 
 
@@ -97,12 +94,51 @@ def index():
 
         other_all = len(beer_styles) - dark_count - ipa_count - sour_count - belgian_count - lager_count - pale_ale_count
 
+        most_popular= max(dark_count, ipa_count, sour_count, belgian_count, lager_count, pale_ale_count)
 
-        # Pass all relevant variables to index.html
+        # Relabel to display in most popular style 
 
-        return render_template('index.html', name=name, city=city, country=country, beer_nr=beer_nr, untappd_url=untappd_url, beer_styles=beer_styles,
-                                             dark_count=dark_count, ipa_count=ipa_count, sour_count=sour_count, belgian_count=belgian_count, lager_count=lager_count,
-                                             other_all=other_all, pale_ale_count=pale_ale_count)
+        if most_popular == ipa_count:
+            most_popular = "IPA"
+        elif most_popular == pale_ale_count:
+            most_popular = "Pale Ale"
+        elif most_popular == sour_count:
+            most_popular = "Sour"
+        elif most_popular == belgian_count:
+            most_popular = "Belgian"
+        elif most_popular == lager_count:
+            most_popular = "Lager"
+        elif most_popular == dark_count:
+            most_popular = "Stout/Porter"
+
+        # Create two dictionaries to pass data to client side
+
+        brewery_dictionary = {
+            'name': name,
+            'city': city,
+            'country': country,
+            'beer_nr': beer_nr,
+            'untappd_url': untappd_url,
+            'beer_styles': beer_styles,
+            'most_popular': most_popular, 
+            'most_popular_beer': most_popular_beer,
+            'latitude': latitude, 
+            'longitude': longitude 
+        }
+
+        beer_dictionary = {
+            'dark_count': dark_count,
+            'ipa_count': ipa_count, 
+            'sour_count': sour_count, 
+            'belgian_count': belgian_count,
+            'lager_count': lager_count,
+            'other_all': other_all, 
+            'pale_ale_count': pale_ale_count
+        }
+
+        # Pass data to index.html
+
+        return render_template('reload.html', brewery_dictionary=brewery_dictionary, beer_dictionary=beer_dictionary)
     else:
         return render_template('index.html')
 

@@ -19,13 +19,17 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js" integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='awesome_markers/leaflet.awesome-markers.css') }}">
+    <script src="{{ url_for('static', filename='awesome_markers/leaflet.awesome-markers.js') }}"></script>
+
 </head>
 
 <body style="background-color:#e3ded3">
@@ -40,89 +44,9 @@
             </form>
         </div>
     </div>
-    <br>
-    <div class="containter">
-        <div class="row">
-            <div class="col-md">
-                <table>
-                    <tr>
-                        <th>Brewery: </th>
-                        <td>{{ name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Location: </th>
-                        <td>{{ city }}{{ country }}</td>
-                    </tr>
-                    <tr>
-                        <th>Untappd: </th>
-                        <td><a target="_blank" href={{ untappd_url }}>{{ untappd_url }}</a></td>
-                    </tr>
-                    <tr>
-                        <th>Number of beers: </th>
-                        <td>{{ beer_nr }}</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="col-md">
-                <canvas id="mainChart" style="height: 600px; width:100%"></canvas>
-            </div>
-        </div>
-        <div id="mapid" style="position:absolute; width:100%; height:20%; bottom:0"></div>
-    </div>
     
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
-    <script>
-        
-        // Render the whole new page after POST return. Remove top left text (brewery info)- only search bar on the start page, after post request processed- 
-        // render new page with chart and brewery information.
-        
-            
-            var mainChart = document.getElementById("mainChart").getContext('2d');
-            
-            Chart.defaults.global.defaultFontFamily = 'Helvetica';
-            Chart.defaults.global.defaultFontSize = 14;
-
-            var colorPalette = ['#d15e0e', '#f5751c', '#d6603a', '#2d4866', '#213651', '#17283c', '#797983']
-            var beerCount = ['{{ ipa_count }}', '{{ pale_ale_count }}', '{{ sour_count }}', '{{ belgian_count }}', '{{ lager_count }}', '{{ dark_count }}', '{{ other_all }}']
-
-            var beerChart = new Chart(mainChart, {
-                type:'doughnut',
-                data: {
-                    labels: ['IPA', 'Pale Ale', 'Sour', 'Belgian', 'Lager', 'Stout/Porter', 'Other'],
-                    datasets: [{
-                        label: 'Beer style',
-                        data: beerCount,
-                        backgroundColor: colorPalette,
-                        borderWidth: 2,
-                        borderColor: 'white',
-                        hoverBorderWidth: 6,
-                        hoverBorderColor: 'white'
-                    }]
-                },
-                options: {
-                    responsive: false,
-                    title: {
-                        display: true,
-                        text: 'Beer styles',
-                        fontSize: 20
-                    },
-                    animation: {
-                        animateScale: false
-                    }
-                }
-            });
-        
-
-            var mymap = L.map('mapid').setView([46.545813, 15.514569], 14);
-
-            L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
-                maxZoom: 20,
-                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-            }).addTo(mymap)
-      
-
-    </script> 
+    {% block content %}
+    
+    {% endblock %}
 </body>
 </html>

@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+{% block content %}
+
+<br>
+<div class="containter">
+    <div class="row">
+        <div class="col-md">
+            <table>
+                <tr>
+                    <th>Brewery </th>
+                    <td>{{ brewery_dictionary.name }}</td>
+                </tr>
+                <tr>
+                    <th>Location </th>
+                    <td>{{ brewery_dictionary.city }}{{ brewery_dictionary.country }}</td>
+                </tr>
+                <tr>
+                    <th>Untappd </th>
+                    <td><a target="_blank" href={{ brewery_dictionary.untappd_url }}>{{ brewery_dictionary.untappd_url }}</a></td>
+                </tr>
+                <tr>
+                    <th><br>Number of beers </th>
+                    <td><br>{{ brewery_dictionary.beer_nr }}</td>
+                </tr>
+                    <th>Most popular style </th>
+                    <td>{{ brewery_dictionary.most_popular }}</td>
+                <tr>
+                </tr>
+                    <th>Most popular beer </th>
+                    <td>{{ brewery_dictionary.most_popular_beer }}</td>
+            </table>
+        </div>
+
+        <div class="col-md">
+            <div id="mapid" style="height: 100%; width:100%">
+        </div>
+    </div>
+        <canvas id="mainChart" style="height: 600px; width:100%"></canvas>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
+<script>    
+    var [latitude, longitude] = ['{{ brewery_dictionary.latitude }}', '{{ brewery_dictionary.longitude }}']
+    var [ipa, pale_ale, sour, belgian, lager, dark, other] = ['{{ beer_dictionary.ipa_count }}', '{{ beer_dictionary.pale_ale_count }}', '{{ beer_dictionary.sour_count }}', '{{ beer_dictionary.belgian_count }}', '{{ beer_dictionary.lager_count }}', '{{ beer_dictionary.dark_count }}', '{{ beer_dictionary.other_all }}']
+</script>
+<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=2"></script>
+
+{% endblock %}
