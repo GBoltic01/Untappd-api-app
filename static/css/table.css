@@ -1,6 +1,8 @@
 th {
     text-align: left;
+    font-size: large;
 }
 td {
-    padding-left: 10px ;
+    padding-left: 25px ;
+    font-size: large;
 }

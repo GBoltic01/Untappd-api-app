@@ -1,16 +1,15 @@
-
-
 form.searchbar input[type=text] {
     margin-bottom: auto;
     margin-top: auto;
     height: 50px;
-    width: 600px;
+    width: 500px;
     color: white;
     background-color: #213651;
     border-radius: 30px;
     border-color: transparent;
     padding: 20px;
     outline: none;
+    box-shadow: 5px 10px 8px #838383;
 }
 
 form.searchbar button {
@@ -31,5 +30,6 @@ input:-webkit-autofill:active
 {
     border: 0px;
     -webkit-text-fill-color: #ffffff;
-    -webkit-box-shadow: 0 0 0px 1000px #213651 inset;
+    -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
+    transition: background-color 5000s ease-in-out 0s;  
 }

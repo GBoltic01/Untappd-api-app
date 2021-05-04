@@ -35,14 +35,15 @@
             <div id="mapid" style="height: 100%; width:100%">
         </div>
     </div>
-        <canvas id="mainChart" style="height: 600px; width:100%"></canvas>
+        <canvas id="mainChart" style="height: 500px; width:100%; padding-top:20px"></canvas>
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
 <script>    
+    var [ipa_sub, pale_sub, sour_sub, belgian_sub, lager_sub, dark_sub, other_sub] = ['{{ beer_styles_dictionary.ipa_substyles }}', '{{ beer_styles_dictionary.pale_ale_substyles }}', '{{ beer_styles_dictionary.sour_substyles }}', '{{ beer_styles_dictionary.belgian_substyles }}', '{{ beer_styles_dictionary.lager_substyles }}', '{{ beer_styles_dictionary.dark_substyles }}', '{{ beer_styles_dictionary.other_substyles }}']
     var [latitude, longitude] = ['{{ brewery_dictionary.latitude }}', '{{ brewery_dictionary.longitude }}']
     var [ipa, pale_ale, sour, belgian, lager, dark, other] = ['{{ beer_dictionary.ipa_count }}', '{{ beer_dictionary.pale_ale_count }}', '{{ beer_dictionary.sour_count }}', '{{ beer_dictionary.belgian_count }}', '{{ beer_dictionary.lager_count }}', '{{ beer_dictionary.dark_count }}', '{{ beer_dictionary.other_all }}']
 </script>
-<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=2"></script>
+<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=14rowqk8"></script>
 
 {% endblock %}

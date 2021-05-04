@@ -1,7 +1,9 @@
 from flask import Flask, render_template, url_for, request, redirect
+from collections import Counter
 import requests
 import json
 import os
+import re
 
 api_endpoint = str(os.environ.get("UNTAPPD_API_KEY"))
 
@@ -72,31 +74,52 @@ def index():
         find_lager = ['Lager', 'Pilsner', 'Bock', 'Keller']
         find_pale_ale = ['Pale Ale']
 
+ 
+
         # Count number of beers by style
 
         dark_all = [s for s in beer_styles if any(xs in s for xs in find_dark)]
-        dark_count = len(dark_all)
+        dark_all_cleaned = [s.replace('&#39;', '') for s in dark_all]
+        dark_count = len(dark_all_cleaned)
+        dark_substyles = Counter(dark_all_cleaned) 
+
 
         ipa_all = [s for s in beer_styles if any(xs in s for xs in find_ipa)]
         ipa_count = len(ipa_all)
+        ipa_substyles = Counter(ipa_all)
+
 
         sour_all = [s for s in beer_styles if any(xs in s for xs in find_sour)]
+        sour_all_cleaned = [s.replace('&#39;', '') for s in sour_all]
         sour_count = len(sour_all)
+        sour_substyles = Counter(sour_all_cleaned)
+
 
         belgian_all = [s for s in beer_styles if any(xs in s for xs in find_belgian)]
+        belgian_all_cleaned = [s.replace('&#39;', '') for s in belgian_all]
         belgian_count = len(belgian_all)
+        belgian_substyles = Counter(belgian_all_cleaned)
+
 
         lager_all = [s for s in beer_styles if any(xs in s for xs in find_lager)]
+        lager_all_cleaned = [s.replace('&#39;', '') for s in lager_all]
         lager_count = len(lager_all)
+        lager_substyles = Counter(lager_all_cleaned)
 
         pale_ale_all = [s for s in beer_styles if any(xs in s for xs in find_pale_ale)]
         pale_ale_count = len(pale_ale_all)
+        pale_ale_substyles = Counter(pale_ale_all)
 
-        other_all = len(beer_styles) - dark_count - ipa_count - sour_count - belgian_count - lager_count - pale_ale_count
+        if (dark_count + ipa_count + sour_count + belgian_count + lager_count + pale_ale_count) > 50:
+            other_all = 0
+        else: 
+            other_all = len(beer_styles) - dark_count - ipa_count - sour_count - belgian_count - lager_count - pale_ale_count
+            other_substyles = "To be added"
+ 
 
         most_popular= max(dark_count, ipa_count, sour_count, belgian_count, lager_count, pale_ale_count)
 
-        # Relabel to display in most popular style 
+        # Relabel to display most popular style 
 
         if most_popular == ipa_count:
             most_popular = "IPA"
@@ -136,9 +159,19 @@ def index():
             'pale_ale_count': pale_ale_count
         }
 
+        beer_styles_dictionary = {
+            'dark_substyles' : dark_substyles,
+            'ipa_substyles' : ipa_substyles,
+            'sour_substyles' : sour_substyles,
+            'belgian_substyles' : belgian_substyles,
+            'lager_substyles' : lager_substyles,
+            'other_substyles' : other_substyles,
+            'pale_ale_substyles' : pale_ale_substyles
+        }
+
         # Pass data to index.html
 
-        return render_template('reload.html', brewery_dictionary=brewery_dictionary, beer_dictionary=beer_dictionary)
+        return render_template('reload.html', brewery_dictionary=brewery_dictionary, beer_dictionary=beer_dictionary, beer_styles_dictionary=beer_styles_dictionary)
     else:
         return render_template('index.html')
 
