@@ -5,8 +5,17 @@ var mainChart = document.getElementById("mainChart").getContext('2d');
 Chart.defaults.global.defaultFontFamily = 'Helvetica';
 Chart.defaults.global.defaultFontSize = 14;
 
-var colorPalette = ['#d15e0e', '#f5751c', '#d6603a', '#2d4866', '#213651', '#17283c', '#797983']
-var beerCount = [ipa, pale_ale, sour, belgian, lager, dark, other]
+const colorPalette = ['#d15e0e', '#f5751c', '#d6603a', '#2d4866', '#213651', '#17283c', '#797983']
+var beerDict = JSON.parse(beer_dictionary)
+var beerCount = [
+                 beerDict.ipa_count, 
+                 beerDict.pale_ale_count, 
+                 beerDict.sour_count, 
+                 beerDict.belgian_count, 
+                 beerDict.lager_count, 
+                 beerDict.dark_count, 
+                 beerDict.other_all
+                ]
 
 var mainChart = new Chart(mainChart, {
     type:'doughnut',
@@ -44,8 +53,11 @@ function secondChart(e){
     // alert(this.data.labels[selectedIndex]);
 
     $("#moveable").animate({right: "25%"}, 1000)
-    console.log(ipa_sub)
-    console.log(Object.values(beer_styles_dictionary)) // test
+
+    var jsonTest = JSON.parse(beer_styles_dictionary)
+
+    //  Set timeot to wait the animation to finish. When the animation is done, 
+    //  create new div and canvas where the second chart will sit.
 
     setTimeout(function() {
         var moveable = document.getElementById('moveable')
@@ -62,18 +74,24 @@ function secondChart(e){
         canvas.style = "padding-top: 20px"
         document.getElementById('parent1').appendChild(canvas);
 
+        // Create second chart 
+
         var secondChart = document.getElementById("secondChart").getContext('2d');
-        var colorPalette = ['#d15e0e', '#f5751c', '#d6603a', '#2d4866', '#213651', '#17283c', '#797983']
-        var beerCount = [ipa, pale_ale, sour, belgian, lager, dark, other]
+
+        const colorScheme = [
+          "#d15e0e", "#f5751c", "#d6603a", "#FA6121", "#FF9900", 
+          "#FFB739", "#DBE8F9", "#466289", "#A0AEC1", "#627894",
+          "#2d4866", "#213651", "#17283c"
+        ]
         
         var secondChart = new Chart(secondChart, {
             type:'doughnut',
             data: {
-                labels: ['IPA', 'Pale Ale', 'Sour', 'Belgian', 'Lager', 'Stout/Porter', 'Other'],
+                labels: Object.keys(jsonTest.ipa_substyles),
                 datasets: [{
                     label: 'Beer style',
-                    data: beerCount,
-                    backgroundColor: colorPalette,
+                    data: Object.values(jsonTest.ipa_substyles),
+                    backgroundColor: colorScheme,
                     borderWidth: 2,
                     borderColor: 'white',
                     hoverBorderWidth: 6,

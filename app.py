@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 from collections import Counter
+import urllib.parse
 import requests
 import json
 import os
@@ -81,12 +82,12 @@ def index():
         dark_all = [s for s in beer_styles if any(xs in s for xs in find_dark)]
         dark_all_cleaned = [s.replace('&#39;', '') for s in dark_all]
         dark_count = len(dark_all_cleaned)
-        dark_substyles = Counter(dark_all_cleaned) 
+        dark_substyles = dict(Counter(dark_all_cleaned))
 
 
         ipa_all = [s for s in beer_styles if any(xs in s for xs in find_ipa)]
         ipa_count = len(ipa_all)
-        ipa_substyles = Counter(ipa_all)
+        ipa_substyles = dict(Counter(ipa_all))
 
 
         sour_all = [s for s in beer_styles if any(xs in s for xs in find_sour)]
