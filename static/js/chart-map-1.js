@@ -50,10 +50,14 @@ var mainChart = new Chart(mainChart, {
 function secondChart(e){
     var activePoints = mainChart.getElementsAtEvent(e);
     var selectedIndex = activePoints[0]._index;
-    // alert(this.data.labels[selectedIndex]);
+    var clickEvent = (this.data.labels[selectedIndex])
+    // if (this is already moved) {skip animation} else do the rest 
 
-    $("#moveable").animate({right: "25%"}, 1000)
-
+    if ($("#moveable").hasClass("col-md-6 offset-3")) {
+        $("#moveable").animate({right: "25%"}, 1000);
+    }; 
+    
+        
     var jsonTest = JSON.parse(beer_styles_dictionary)
 
     //  Set timeot to wait the animation to finish. When the animation is done, 
@@ -71,26 +75,63 @@ function secondChart(e){
     
         var canvas = document.createElement('canvas');
         canvas.id = "secondChart";
-        canvas.style = "padding-top: 20px"
+        canvas.style = "padding-top: 20px";
         document.getElementById('parent1').appendChild(canvas);
 
         // Create second chart 
+        var values 
+        var keys
+    
+
+        function substyleData(){
+            switch(clickEvent) {
+                case "IPA": {
+                    [values, keys] = [Object.values(jsonTest.ipa_substyles), Object.keys(jsonTest.ipa_substyles)];
+                    break;
+                };
+                case "Pale Ale": {
+                    [values, keys] = [Object.values(jsonTest.pale_ale_substyles), Object.keys(jsonTest.pale_ale_substyles)];
+                    break;
+                };
+                case "Sour": {
+                    [values, keys] = [Object.values(jsonTest.sour_substyles), Object.keys(jsonTest.sour_substyles)];
+                    break;
+                };
+                case "Belgian": {
+                    [values, keys] = [Object.values(jsonTest.belgian_substyles), Object.keys(jsonTest.belgian_substyles)];
+                    break;
+                };
+                case "Lager": {
+                    [values, keys] = [Object.values(jsonTest.lager_substyles), Object.keys(jsonTest.lager_substyles)];
+                    break;
+                };
+                case "Stout/Porter": {
+                    [values, keys] = [Object.values(jsonTest.dark_substyles), Object.keys(jsonTest.dark_substyles)];
+                    break;
+                };
+                case "Other": {
+                    [values, keys] = [Object.values(jsonTest.other_substyles), Object.keys(jsonTest.other_substyles)];
+                    break;
+                };
+            };
+        };
+        substyleData() 
 
         var secondChart = document.getElementById("secondChart").getContext('2d');
 
         const colorScheme = [
-          "#d15e0e", "#f5751c", "#d6603a", "#FA6121", "#FF9900", 
-          "#FFB739", "#DBE8F9", "#466289", "#A0AEC1", "#627894",
-          "#2d4866", "#213651", "#17283c"
+          "#d15e0e", "#A0AEC1", "#213651", "#f5751c", "#FF9900", 
+          "#627894", "#2d4866", "#FA6121", "#d6603a", "#FFB739", 
+          "#DBE8F9", "#466289", "#17283c"
         ]
         
         var secondChart = new Chart(secondChart, {
             type:'doughnut',
             data: {
-                labels: Object.keys(jsonTest.ipa_substyles),
+                labels: keys,
                 datasets: [{
                     label: 'Beer style',
-                    data: Object.values(jsonTest.ipa_substyles),
+                    data: values,
                     backgroundColor: colorScheme,
                     borderWidth: 2,
                     borderColor: 'white',

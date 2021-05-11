@@ -80,9 +80,8 @@ def index():
         # Count number of beers by style
 
         dark_all = [s for s in beer_styles if any(xs in s for xs in find_dark)]
-        dark_all_cleaned = [s.replace('&#39;', '') for s in dark_all]
-        dark_count = len(dark_all_cleaned)
-        dark_substyles = dict(Counter(dark_all_cleaned))
+        dark_count = len(dark_all)
+        dark_substyles = dict(Counter(dark_all))
 
 
         ipa_all = [s for s in beer_styles if any(xs in s for xs in find_ipa)]
@@ -91,21 +90,18 @@ def index():
 
 
         sour_all = [s for s in beer_styles if any(xs in s for xs in find_sour)]
-        sour_all_cleaned = [s.replace('&#39;', '') for s in sour_all]
         sour_count = len(sour_all)
-        sour_substyles = Counter(sour_all_cleaned)
+        sour_substyles = Counter(sour_all)
 
 
         belgian_all = [s for s in beer_styles if any(xs in s for xs in find_belgian)]
-        belgian_all_cleaned = [s.replace('&#39;', '') for s in belgian_all]
         belgian_count = len(belgian_all)
-        belgian_substyles = Counter(belgian_all_cleaned)
+        belgian_substyles = Counter(belgian_all)
 
 
         lager_all = [s for s in beer_styles if any(xs in s for xs in find_lager)]
-        lager_all_cleaned = [s.replace('&#39;', '') for s in lager_all]
         lager_count = len(lager_all)
-        lager_substyles = Counter(lager_all_cleaned)
+        lager_substyles = Counter(lager_all)
 
         pale_ale_all = [s for s in beer_styles if any(xs in s for xs in find_pale_ale)]
         pale_ale_count = len(pale_ale_all)
@@ -116,7 +112,8 @@ def index():
         else: 
             other_all = len(beer_styles) - dark_count - ipa_count - sour_count - belgian_count - lager_count - pale_ale_count
             other_substyles = "To be added"
- 
+            
+        # ADD OTHER SUBSTYLES
 
         most_popular= max(dark_count, ipa_count, sour_count, belgian_count, lager_count, pale_ale_count)
 
