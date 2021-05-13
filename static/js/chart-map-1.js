@@ -51,7 +51,6 @@ function secondChart(e){
     var activePoints = mainChart.getElementsAtEvent(e);
     var selectedIndex = activePoints[0]._index;
     var clickEvent = (this.data.labels[selectedIndex])
-    // if (this is already moved) {skip animation} else do the rest 
 
     if ($("#moveable").hasClass("col-md-6 offset-3")) {
         $("#moveable").animate({right: "25%"}, 1000);
@@ -63,14 +62,19 @@ function secondChart(e){
     //  Set timeot to wait the animation to finish. When the animation is done, 
     //  create new div and canvas where the second chart will sit.
 
+
     setTimeout(function() {
-        var moveable = document.getElementById('moveable')
-        moveable.className = "col-md-6"
-        moveable.style = ""
-    
+        var moveable = document.getElementById('moveable');
+        moveable.className = "col-md-6";
+        moveable.style = "";
+
+        if (document.contains(document.getElementById("parent1"))) {
+            document.getElementById("parent1").remove();
+        };
+
         var div = document.createElement('div');
-        div.id = 'parent1'
-        div.className = "col-md-6"
+        div.id = 'parent1';
+        div.className = "col-md-6";
         document.getElementById('parent').appendChild(div)
     
         var canvas = document.createElement('canvas');
