@@ -1,0 +1,41 @@
+form {
+    display: inline-block;
+    position: relative;
+    top: 30%;
+    left: 5%;
+}
+
+form.searchbar1 input[type=text] {
+    padding-left: 20px;
+    top: 50px;
+    height: 50px;
+    width: 850px;
+    color: rgb(194, 194, 194);
+    background-color: #ffffff;
+    border-radius: 30px;
+    border-color: rgb(204, 204, 204);
+    border-width: 1px;
+    outline: none;
+}
+
+form.searchbar1 button {
+    margin-left: 10px;
+    height: 40px;
+    width: 120px;
+    color: white;
+    background-color:rgb(255, 153, 0);
+    border-radius: 20px;
+    border-color: transparent;
+    outline: none;
+
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+{
+    border: 0px;
+    -webkit-text-fill-color: #ffffff;
+    -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
+    transition: background-color 5000s ease-in-out 0s;  
+}
