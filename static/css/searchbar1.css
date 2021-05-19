@@ -8,9 +8,9 @@ form {
 form.searchbar1 input[type=text] {
     padding-left: 20px;
     top: 50px;
-    height: 50px;
+    height: 40px;
     width: 850px;
-    color: rgb(194, 194, 194);
+    color: rgb(245, 245, 245);
     background-color: #ffffff;
     border-radius: 30px;
     border-color: rgb(204, 204, 204);
@@ -34,8 +34,9 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active
 {
-    border: 0px;
-    -webkit-text-fill-color: #ffffff;
-    -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
-    transition: background-color 5000s ease-in-out 0s;  
+    border-width: 1px;
+    border-color: rgb(131, 131, 131);;
+    -webkit-text-fill-color:rgb(194, 194, 194);
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    transition: background-color 5000s ease-in-out 2s;  
 }

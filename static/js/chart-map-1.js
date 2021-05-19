@@ -32,15 +32,12 @@ var mainChart = new Chart(mainChart, {
         }]
     },
     options: {
+        cutoutPercentage: 80,
         legend: {
-            display: true
+            display: true,
+            position: 'left'
         },
         responsive: true,
-        title: {
-            display: true,
-            text: 'Beer styles',
-            fontSize: 20
-        },
         onClick: secondChart
     }
 });

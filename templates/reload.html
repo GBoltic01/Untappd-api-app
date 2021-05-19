@@ -2,42 +2,44 @@
 {% block content %}
 
 <br>
+
+<div class="wraper">
+    <p class="brewery-name">{{ brewery_dictionary.name }}
+        <span class="untappd"><a target="_blank" href={{ brewery_dictionary.untappd_url }}>Untappd</a></span>
+    </p>
+    <hr>
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Numer of beers</th>
+            <th>Most popular style</th>
+            <th>Most popular beer</th>
+        </tr>
+        <tr>
+            <td>{{ brewery_dictionary.city }}{{ brewery_dictionary.country }}</td>
+            <td>{{ brewery_dictionary.beer_nr }}</td>
+            <td>{{ brewery_dictionary.most_popular }}</td>
+            <td>{{ brewery_dictionary.most_popular_beer }}</td>
+        </tr>
+    </table>
+    <hr>
+    <div id="parent" class="row" style="height: 400px">
+        <div id="moveable" class="col-md-6 offset-3">
+            <canvas id="mainChart" style="padding-top:20px"></canvas>
+        </div>
+    </div>
+        <div id="mapid" style="height: 250px; width:90%; margin: auto;">
+        </div>
+</div>
+
+
+
+
 <div class="containter">
     <div class="row">
-        <div class="col-md">
-            <table>
-                <tr>
-                    <th>Brewery </th>
-                    <td>{{ brewery_dictionary.name }}</td>
-                </tr>
-                <tr>
-                    <th>Location </th>
-                    <td>{{ brewery_dictionary.city }}{{ brewery_dictionary.country }}</td>
-                </tr>
-                <tr>
-                    <th>Untappd </th>
-                    <td><a target="_blank" href={{ brewery_dictionary.untappd_url }}>{{ brewery_dictionary.untappd_url }}</a></td>
-                </tr>
-                <tr>
-                    <th><br>Number of beers </th>
-                    <td><br>{{ brewery_dictionary.beer_nr }}</td>
-                </tr>
-                    <th>Most popular style </th>
-                    <td>{{ brewery_dictionary.most_popular }}</td>
-                <tr>
-                </tr>
-                    <th>Most popular beer </th>
-                    <td>{{ brewery_dictionary.most_popular_beer }}</td>
-            </table>
-        </div>
 
         <div class="col-md">
             <div id="mapid" style="height: 100%; width:100%"></div>
-        </div>
-    </div>
-    <div id="parent" class="row" style="height: 500px">
-        <div id="moveable" class="col-md-6 offset-3">
-            <canvas id="mainChart" style="padding-top:20px"></canvas>
         </div>
     </div>
 </div>
@@ -49,6 +51,6 @@
     var [latitude, longitude] = ['{{ brewery_dictionary.latitude }}', '{{ brewery_dictionary.longitude }}']
     var beer_dictionary = ['{{ beer_dictionary|tojson }}']
 </script>
-<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=sodsddsds32dsewfdwqwqfdwqsins56fd6889rereds90asads432g32errwe3wqdsdghds2dswqewewew11233"></script>
+<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=006"></script>
 
 {% endblock %}
