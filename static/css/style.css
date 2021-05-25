@@ -14,7 +14,7 @@
   div.oranzna {
     height: 250px;
     width: 100%;
-    background-color: orange;
+    background: linear-gradient(87.07deg, #E28116 0%, #EEA934 100%);
   }
 
   label.heading {
@@ -93,7 +93,7 @@
 
   a:hover {
     color: rgb(155, 155, 155);
-    transition: 1s;
+    transition: 0.5s;
   }
 
   div.search-window {
@@ -102,16 +102,86 @@
     background-color: white;
     border-radius: 10px;
     position: relative;
-    top: -30px;
+    top: -40px;
     left: 20%;
   }
 
   div.wraper {
     background-color: white;
     width: 60%;
-    height: 900px;
+    height: auto;
     border-radius: 10px;
     position: relative;
     left: 20%;
-    top: -20px
+    top: -20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    overflow: hidden; 
+  }
+
+  div.image {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  img {
+    position: absolute;
+    margin: auto;
+    display: inline-block;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  #legend ul {
+    font: 12px;
+    display: inline-block; 
+    text-align: left; 
+  }
+
+  #legend li div {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    position: relative;
+    top: 3px;
+    display:inline-block;
+  }
+
+  #legend hr {
+    width: 300%;
+    border-width: 2px;
+    left: auto;
+  }
+
+  p {
+    position: relative;
+    margin-left: 5%;
+    margin-right: 5%;
+    top: 20px;
+  }
+
+  div.about {
+    position: relative;
+    width: 60%;
+    height: auto;
+    left: 20%;
+    top: 20px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    overflow: hidden; 
+  }
+
+  div h3 {
+    top: 20px;
+    position: relative;
+    margin-left: 5%;
+    margin-bottom: 20px;
   }

@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- CSS STYLING -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=158">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}?v=39">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=168">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}?v=34">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/searchbar.css') }}?v=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/searchbar1.css') }}?v=83">
     <!-- LEAFLET -->
@@ -39,8 +39,7 @@
 <body>
     <div class="orange-ribbon"></div>
     <div class="oranzna">
-        <label class="heading">Explore the Craft</label>
-            <p class="subheading">Discover the finest breweries around.</p>
+        <label class="heading">About the project</label>
         <nav>
             <label class="logo">BREWSEARCH</label>
             <ul>
@@ -50,20 +49,17 @@
         </nav>
     </div>
 
-    <div class="search-window">
-        <form class="searchbar1" id="submit-form" action="/" method="post" style="text-align:center" autocomplete="off">
-            <div>
-                <div>
-                    <label class="search-text">Find a brewery</label>
-                </div>
-                <input type="text" name="brewery_entry" placeholder="Enter brewery name..."> <!--  search icom to add later   <i class="fa fa-search"></i>  -->
-                <button type="submit">Search</button>
-            </div>
-        </form>
+    <div class="about">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Aenean euismod elementum nisi quis eleifend quam adipiscing. A diam sollicitudin tempor id eu. Enim sed faucibus turpis in eu. 
+            Ac placerat vestibulum lectus mauris ultrices eros in cursus. Tempus iaculis urna id volutpat lacus laoreet non curabitur. 
+            Euismod nisi porta lorem mollis aliquam ut porttitor leo. Donec adipiscing tristique risus nec feugiat. 
+            Lectus urna duis convallis convallis tellus id interdum velit. Maecenas accumsan lacus vel facilisis volutpat est velit egestas. 
+         </p>
+         <h3>Get in touch</h3>
+         <p><b>Project developed by Woodpecker aka Gregor Boltic.<br></b> Get in touch if you have any questions, comments, reccommendations or if you experience any bugs or unusual behaviour of the website.<p>
+         <p><b>Design support, guidance and advice by ParaNorman Activity aka Norman Fiser.<br></b></p>  
     </div>
-
-    {% block content %}
-    
-    {% endblock %}
 </body>
 </html>

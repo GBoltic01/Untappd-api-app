@@ -34,11 +34,13 @@ def json_extract(obj, key):
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
 
         brewery = request.form["brewery_entry"] 
+
 
         # Get brewery and beer info from Untappd
 
@@ -52,10 +54,18 @@ def index():
         beer_response = requests.get(beer_url, params=beer_params)   
         beer_1 = beer_response.json()
 
+        # Remove all entries that don't match the seacrh input string (brewery name)
+        # Problem with serach entry. If this code is included, misspelling causes trouble. Try to find a way aound it 
+        '''for element in beer_1['response']['beers']['items']:
+            if brewery.title() not in element['brewery']['brewery_name']:   
+                element.pop('beer') 
+        
+        print(json_extract(beer_1, 'beer_name'))
 
-        # Extract relevant data from JSON
+        # Extract relevant data from JSON'''
 
         name = brewery_json['response']['brewery']['items'][0]['brewery']['brewery_name']
+        image = brewery_json['response']['brewery']['items'][0]['brewery']['brewery_label']
         city = brewery_json['response']['brewery']['items'][0]['brewery']['location']['brewery_city'] + ', '
         country = brewery_json['response']['brewery']['items'][0]['brewery']['country_name']
         beer_nr = brewery_json['response']['brewery']['items'][0]['brewery']['beer_count']
@@ -64,7 +74,8 @@ def index():
         longitude = brewery_json['response']['brewery']['items'][0]['brewery']['location']['lng']
         beer_styles = json_extract(beer_1, 'beer_style')
 
-        most_popular_beer = beer_1['response']['beers']['items'][0]['beer']['beer_name']
+        #print(beer_1['response']['beers']['items'])
+        most_popular_beer = json_extract(beer_1, 'beer_name')[0]
 
         # Create filter/count criteria 
 
@@ -75,7 +86,8 @@ def index():
         find_lager = ['Lager', 'Pilsner', 'Bock', 'Keller']
         find_pale_ale = ['Pale Ale']
 
- 
+        all_filters = ['IPA', 'India Pale Ale', 'Stout', 'Porter', 'Sour', 'Farmhouse', 'Gose', 'Lambic', 'Belgian', 'Lager', 'Pilsner', 'Bock', 'Keller', 'Pale Ale']
+        
 
         # Count number of beers by style
 
@@ -83,21 +95,17 @@ def index():
         dark_count = len(dark_all)
         dark_substyles = dict(Counter(dark_all))
 
-
         ipa_all = [s for s in beer_styles if any(xs in s for xs in find_ipa)]
         ipa_count = len(ipa_all)
         ipa_substyles = dict(Counter(ipa_all))
-
 
         sour_all = [s for s in beer_styles if any(xs in s for xs in find_sour)]
         sour_count = len(sour_all)
         sour_substyles = Counter(sour_all)
 
-
         belgian_all = [s for s in beer_styles if any(xs in s for xs in find_belgian)]
         belgian_count = len(belgian_all)
         belgian_substyles = Counter(belgian_all)
-
 
         lager_all = [s for s in beer_styles if any(xs in s for xs in find_lager)]
         lager_count = len(lager_all)
@@ -107,12 +115,11 @@ def index():
         pale_ale_count = len(pale_ale_all)
         pale_ale_substyles = Counter(pale_ale_all)
 
-        if (dark_count + ipa_count + sour_count + belgian_count + lager_count + pale_ale_count) > 50:
-            other_all = 0
-        else: 
-            other_all = len(beer_styles) - dark_count - ipa_count - sour_count - belgian_count - lager_count - pale_ale_count
-            other_substyles = "To be added"
-            
+        other_all = [s for s in beer_styles if not any(xs in s for xs in all_filters)]
+        other_count = len(other_all)
+        other_substyles = Counter(other_all)
+
+        
         # ADD OTHER SUBSTYLES
 
         most_popular= max(dark_count, ipa_count, sour_count, belgian_count, lager_count, pale_ale_count)
@@ -132,10 +139,11 @@ def index():
         elif most_popular == dark_count:
             most_popular = "Stout/Porter"
 
-        # Create two dictionaries to pass data to client side
+        # Create three dictionaries to pass data to client side
 
         brewery_dictionary = {
             'name': name,
+            'image': image,
             'city': city,
             'country': country,
             'beer_nr': beer_nr,
@@ -153,7 +161,7 @@ def index():
             'sour_count': sour_count, 
             'belgian_count': belgian_count,
             'lager_count': lager_count,
-            'other_all': other_all, 
+            'other_all': other_count, 
             'pale_ale_count': pale_ale_count
         }
 
@@ -173,6 +181,9 @@ def index():
     else:
         return render_template('index.html')
 
+@app.route('/about')
+def about():
+    return render_template("about.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

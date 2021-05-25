@@ -3,40 +3,33 @@ form {
     position: relative;
     top: 30%;
     left: 5%;
+    width:80%
 }
 
 form.searchbar1 input[type=text] {
     padding-left: 20px;
     top: 50px;
     height: 40px;
-    width: 850px;
-    color: rgb(245, 245, 245);
+    width: 100%;
+    color: #afafaf;
     background-color: #ffffff;
-    border-radius: 30px;
-    border-color: rgb(204, 204, 204);
-    border-width: 1px;
+    border-radius: 20px;
+    border-width: 2px;
+    border-color: #afafaf;
     outline: none;
 }
 
 form.searchbar1 button {
-    margin-left: 10px;
+    position: relative;
+    bottom: 40px;
+    left: 15%;
+    float: right;
     height: 40px;
-    width: 120px;
+    width: 12%;
     color: white;
     background-color:rgb(255, 153, 0);
     border-radius: 20px;
     border-color: transparent;
     outline: none;
 
-}
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active
-{
-    border-width: 1px;
-    border-color: rgb(131, 131, 131);;
-    -webkit-text-fill-color:rgb(194, 194, 194);
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
-    transition: background-color 5000s ease-in-out 2s;  
 }
