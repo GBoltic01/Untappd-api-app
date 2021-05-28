@@ -16,10 +16,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- CSS STYLING -->
+    
+    <!-- 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=163">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}?v=39">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/searchbar1.css') }}?v=83">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/searchbar1.css') }}?v=83"> 
+    -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}?v=0037">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/searchbar1.css') }}?v=83"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}?v=39">
     <!-- LEAFLET -->
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <!-- CHART JS -->
@@ -38,22 +45,28 @@
 <body>
     <div class="orange-ribbon"></div>
     <div class="oranzna">
-        <label class="heading">Explore the Craft</label>
-            <p class="subheading">Discover the finest breweries around.</p>
         <nav>
-            <label class="logo">BREWSEARCH</label>
-            <ul>
-                <li><a action="/" href="/">Search</a></li>
-                <li><a action="/about" href="/about">About</a></li>
-            </ul>
+            <div class="content-width">
+                <label class="logo">BREWSEARCH</label>
+                <ul>
+                    <li><a action="/" href="/">Search</a></li>
+                    <li><a action="/about" href="/about">About</a></li>
+                </ul>
+            </div>
         </nav>
+        <div class="content-width">
+            <header>
+                <h2>Explore the Craft</h2>
+                <p>Discover the finest breweries around.</p>
+            </header>
+        </div>
     </div>
 
-    <div class="search-window">
+    <div class="wraper" style="margin-top:-30px">
         <form class="searchbar1" id="submit-form" action="/" method="post" style="text-align:center" autocomplete="off">
             <div>
                 <div>
-                    <label class="search-text">Find a brewery</label>
+                    <label>Find a brewery</label>
                 </div>
                 <input type="text" name="brewery_entry" placeholder="Enter brewery name..."> <!--  search icom to add later   <i class="fa fa-search"></i>  -->
                 <button type="submit">Search</button>

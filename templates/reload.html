@@ -8,28 +8,31 @@
     <hr>
     <table>
         <tr>
-            <th>Location</th>
-            <th>Numer of beers</th>
-            <th>Most popular style</th>
-            <th>Most popular beer</th>
+            <div class="split">
+                <th>Location</th>
+                <th>Numer of beers</th>
+                <th>Most popular style</th>
+                <th>Most popular beer</th>
+            </div>
         </tr>
         <tr>
-            <td>{{ brewery_dictionary.city }}{{ brewery_dictionary.country }}</td>
-            <td>{{ brewery_dictionary.beer_nr }}</td>
-            <td>{{ brewery_dictionary.most_popular }}</td>
-            <td>{{ brewery_dictionary.most_popular_beer }}</td>
+            <div class="split">
+                <td>{{ brewery_dictionary.city }}{{ brewery_dictionary.country }}</td>
+                <td>{{ brewery_dictionary.beer_nr }}</td>
+                <td>{{ brewery_dictionary.most_popular }}</td>
+                <td>{{ brewery_dictionary.most_popular_beer }}</td>
+            </div>
         </tr>
     </table>
     <hr>
-
-    <div id="legend" class="legend" style="float:left; margin-left:5%"></div>
-
-    <div id="parent" style="position: relative; margin-left:auto; margin-right:0%; height:40vh; width:40vw">  
-        <canvas id="mainChart" style="padding-top:20px z-index:1000;"></canvas>
-        <!-- <div id="image" class="image"></div> !-->
+    <div class="split">
+        <div id="legend" class="legend"></div>
+        <div id="parent">  
+            <canvas id="mainChart"></canvas>
+            <!-- <div id="image" class="image"></div> !-->
+        </div>
     </div>
-
-        <div id="mapid" style="height: 250px; width:90%; margin: auto; border-radius: 10px"></div>
+        <div id="mapid" style="height: 250px; width:95%; margin:auto; border-radius:10px; margin-top:30px"></div>
 </div>
 
 
@@ -40,6 +43,6 @@
     var beer_dictionary = ['{{ beer_dictionary|tojson }}']
     var beer_image = '{{ brewery_dictionary.image }}'
 </script>
-<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=107"></script>
+<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=111"></script>
 
 {% endblock %}
