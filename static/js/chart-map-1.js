@@ -12,41 +12,47 @@ var beerCount = [
 
 // CREATE MAIN CHART
 
-var canvas = document.getElementById("mainChart").getContext('2d');
-var mainChart = new Chart(canvas, {
-    type:'doughnut',
-    data: {
-        labels: ['IPA', 'Pale Ale', 'Sour', 'Belgian', 'Lager', 'Stout/Porter', 'Other'],
-        datasets: [{
-            data: beerCount,
-            backgroundColor: colorPalette,
-            borderWidth: 2,
-            borderColor: 'white',
-            hoverBorderWidth: 6,
-            hoverBorderColor: 'white'
-        }]
-    },
-    options: {
-        cutoutPercentage: 80,
-        legend: false,
-        legendCallback: function(mainChart) {
-            var ul = document.createElement('ul');
-            var itemColor =  mainChart.data.datasets[0].backgroundColor; 
-            var dataValue = mainChart.data.datasets[0].data; 
-            mainChart.data.labels.forEach(function(label, index){
-                ul.innerHTML += `
-                <li>
-                    <div style='background-color: ${itemColor[index]}'></div>${label}
-                </li><hr>`
-            });
-            return ul.outerHTML;
+var mainChart
+function createMainChart() {
+    if ($("#back-arrow")) {
+        $("#back-arrow").remove();
+    };
+    var canvas = document.getElementById("mainChart").getContext('2d');
+    mainChart = new Chart(canvas, {
+        type:'doughnut',
+        data: {
+            labels: ['IPA', 'Pale Ale', 'Sour', 'Belgian', 'Lager', 'Stout/Porter', 'Other'],
+            datasets: [{
+                data: beerCount,
+                backgroundColor: colorPalette,
+                borderWidth: 2,
+                borderColor: 'white',
+                hoverBorderWidth: 6,
+                hoverBorderColor: 'white'
+            }]
         },
-        responsive: true,
-        onClick: secondChart
-    }
-});
-legend.innerHTML = mainChart.generateLegend(); 
-
+        options: {
+            cutoutPercentage: 80,
+            legend: false,
+            legendCallback: function(mainChart) {
+                var ul = document.createElement('ul');
+                var itemColor =  mainChart.data.datasets[0].backgroundColor; 
+                var dataValue = mainChart.data.datasets[0].data; 
+                mainChart.data.labels.forEach(function(label, index){
+                    ul.innerHTML += `
+                    <li>
+                        <div style='background-color: ${itemColor[index]}'></div>${label}
+                    </li><hr>`
+                });
+                return ul.outerHTML;
+            },
+            responsive: true,
+            onClick: secondChart
+        }
+    });
+    legend.innerHTML = mainChart.generateLegend(); 
+}
+createMainChart();
 
 
 // FUNCTION TO GENERATE SECOND CHART ON CLICK 
@@ -58,9 +64,11 @@ function secondChart(e){
         
     var jsonTest = JSON.parse(beer_styles_dictionary);
 
-    mainChart.destroy(); 
+    mainChart.destroy();
+
     var span = document.createElement('span')
-    span.innerHTML = '<i id="back-arrow" class="fas fa-arrow-left" style="float: left; padding-left:25%; display:inline-block"></i>'
+    span.className = "back-arrow"
+    span.innerHTML = '<i id="back-arrow" class="fas fa-arrow-left"></i>'
     document.getElementById("parent").appendChild(span)
 
     span.addEventListener("click", function() {
@@ -140,7 +148,7 @@ function secondChart(e){
                 secondChart.data.labels.forEach(function(label, index){
                     ul.innerHTML += `
                     <li>
-                        "<div style='background-color: ${itemColor[index]}'></div>${label}"
+                        <div style='background-color: ${itemColor[index]}'></div>${label}
                     </li><hr>`
                 });
                 return ul.outerHTML;

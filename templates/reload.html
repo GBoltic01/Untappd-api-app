@@ -24,7 +24,7 @@
 
     <div id="legend" class="legend" style="float:left; margin-left:5%"></div>
 
-    <div id="parent" style="position: relative; margin-left:auto; margin-right:0%%; height:40vh; width:40vw">  
+    <div id="parent" style="position: relative; margin-left:auto; margin-right:0%; height:40vh; width:40vw">  
         <canvas id="mainChart" style="padding-top:20px z-index:1000;"></canvas>
         <!-- <div id="image" class="image"></div> !-->
     </div>
@@ -40,6 +40,6 @@
     var beer_dictionary = ['{{ beer_dictionary|tojson }}']
     var beer_image = '{{ brewery_dictionary.image }}'
 </script>
-<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=097"></script>
+<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=107"></script>
 
 {% endblock %}

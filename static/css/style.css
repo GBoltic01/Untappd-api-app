@@ -154,8 +154,7 @@
   }
 
   #legend hr {
-    width: 300%;
-    border-width: 2px;
+    border-width: 0px;
     left: auto;
   }
 
@@ -184,4 +183,11 @@
     position: relative;
     margin-left: 5%;
     margin-bottom: 20px;
+  }
+
+  span.back-arrow {
+    float: left; 
+    padding-left:25%;
+    position: relative;
+    bottom: 85%
   }
