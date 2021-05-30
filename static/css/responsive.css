@@ -69,7 +69,6 @@ div.wraper {
     height: auto;
     border-radius: 10px;
     margin-inline: auto;
-    padding-bottom: 20px;
     overflow: hidden; 
     margin-top: 10px;
   }
@@ -85,6 +84,15 @@ label.logo{
     font-size: 15px;
     line-height: 50px;
     font-weight: bold;
+}
+
+div.find-brewery {
+    text-align: left; 
+    font-size: 24px; 
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: rgb(43, 43, 43);
 }
 
 nav ul{
@@ -108,23 +116,22 @@ a:hover {
     transition: 0.5s;
 }
 
+#parent {
+    display: block;
+    width: min(100%, 650px);
+    height: min(300px, 20vw);
+}
+
+@media (max-width: 1024px) {
+    #parent {
+
+    }
+}
+
 .split {
     display: flex;
-    flex-direction: column;
-}
-
-@media (min-width: 40em) {
-    .split {
-        flex-direction: row;
-    }
-    .split > * {
-        flex-basis: 100%;
-    }
-}
-
-.parent {
-    display: block;
-    max-width: 100%;
+    flex-direction: row;
+    flex-basis: 100%;
 }
 
 span.back-arrow {
@@ -133,11 +140,15 @@ span.back-arrow {
     position: relative;
     bottom: 85%
   }
+div.legend {
+    width: min(450px, 50vw);
+}
 
 #legend ul {
-    font: 12px;
+    font-size: 15px;
     display: inline-block; 
     text-align: left; 
+    list-style-type: none;
   }
 
 #legend li div {
@@ -145,6 +156,56 @@ span.back-arrow {
     height: 20px;
     border-radius: 10px;
     position: relative;
-    top: 3px;
+    top: 4px;
     display:inline-block;
   }
+  p.legend-item {
+    margin-left: 15px;
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+@media (max-width: 720px) {
+    div.oranzna {
+        height: 220px;
+    }
+    label.logo {
+        font-size: 12px;
+        line-height: 40px;
+    }
+    nav {
+        height: 40px;
+    }
+    nav ul li {
+        line-height: 40px;
+        margin: 0px 0px;
+        font-size: 12px;
+    }
+    header {
+        font-size: 16px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    p.brewery.name {
+        font-size: 18px;
+    }
+    legend ul li {
+        font-size: 12px;
+    }
+    .split {
+        flex-direction: column;
+    }
+    .split > * {
+        flex-basis: 100%;
+    } 
+    div.find-brewery {
+        font-size: 18px;
+        padding-top: 10px;
+        padding-bottom: 0px;
+    }
+    #parent {
+        height: 30vw;
+    }    
+}

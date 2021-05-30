@@ -40,8 +40,8 @@ function createMainChart() {
                 var dataValue = mainChart.data.datasets[0].data; 
                 mainChart.data.labels.forEach(function(label, index){
                     ul.innerHTML += `
-                    <li style="font-size:17px;">
-                        <div style='background-color: ${itemColor[index]}'></div>${label}
+                    <li>
+                        <div style='background-color: ${itemColor[index]}'></div><p class="legend-item">${label}</p>
                     </li>`
                 });
                 return ul.outerHTML;
@@ -147,8 +147,8 @@ function secondChart(e){
                 var itemColor =  secondChart.data.datasets[0].backgroundColor; 
                 secondChart.data.labels.forEach(function(label, index){
                     ul.innerHTML += `
-                    <li style="font-size:17px;">
-                        <div style='background-color: ${itemColor[index]}'></div>${label}
+                    <li>
+                        <div style='background-color: ${itemColor[index]}'></div><p class="legend-item">${label}</p>
                     </li>`
                 });
                 return ul.outerHTML;

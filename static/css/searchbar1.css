@@ -3,20 +3,21 @@ form {
     position: relative;
     top: 30%;
     left: 5%;
-    width:80%
+    width: max(80%, 150px);
 }
 
 form.searchbar1 input[type=text] {
     padding-left: 20px;
     top: 50px;
     height: 40px;
-    width: 100%;
+    width: 95%;
     color: #afafaf;
     background-color: #ffffff;
     border-radius: 20px;
-    border-width: 2px;
+    border-width: 1px;
     border-color: #afafaf;
     outline: none;
+    font-size: 16px;
 }
 
 form.searchbar1 button {
@@ -25,11 +26,39 @@ form.searchbar1 button {
     left: 15%;
     float: right;
     height: 40px;
-    width: 12%;
+    width: min(15%, 100px);
     color: white;
     background-color:rgb(255, 153, 0);
     border-radius: 20px;
     border-color: transparent;
     outline: none;
+    font-size: 16px;
+    text-align: center;
+}
 
+@media (max-width: 720px) {
+    form.searchbar1 input[type=text] {
+        height: 30px;
+        width: 95%;
+        border-radius: 15px;
+        font-size: 12px;
+    }
+    form.searchbar1 button {
+        width: 15%;
+        height: 30px;
+        border-radius: 15px;
+        font-size: 12px;
+        bottom: 30px;
+        margin-left: 10px
+    }
+}
+
+@media (max-width: 480px) {
+    form.searchbar1 button {
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        font-size: 0px;
+        bottom: 30px;
+    }
 }

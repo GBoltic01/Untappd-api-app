@@ -6,6 +6,7 @@ table {
 th {
     width: 25%;
     padding-bottom: 10px;
+    line-height: 1;
     text-align: left;
     font-size: 17px;
     font-weight: bold;
@@ -15,14 +16,16 @@ td {
     width: 25%;
     text-align: left;
     font-size: 15px;
+    line-height: 1;
     color: rgb(46, 46, 46);
 }
 
 p.brewery-name {
-    padding-bottom: 20px;
+    margin-top: 10px;
     text-align: left;
     font-size: 20px;
     font-weight: bold;
+    margin-left: 5%;
     color: rgb(46, 46, 46);
 }
 
@@ -35,4 +38,13 @@ span.untappd {
 
 hr {
     border-top: 2px solid rgb(238, 238, 238);
+}
+
+@media (max-width: 720px) {
+    th {
+        font-size: 14px;
+    }
+    td {
+        font-size: 12px;
+    }
 }
