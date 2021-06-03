@@ -47,4 +47,7 @@ hr {
     td {
         font-size: 12px;
     }
+    p.brewery-name {
+        font-size: 16px;
+    }
 }

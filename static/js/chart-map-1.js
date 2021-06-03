@@ -32,7 +32,7 @@ function createMainChart() {
             }]
         },
         options: {
-            cutoutPercentage: 80,
+            cutoutPercentage: 85,
             legend: false,
             legendCallback: function(mainChart) {
                 var ul = document.createElement('ul');
@@ -140,12 +140,14 @@ function secondChart(e){
         },
         options: {
             legend: false,
-            cutoutPercentage: 80,
+            cutoutPercentage: 85,
             responsive: true,
             legendCallback: function(secondChart) {
                 var ul = document.createElement('ul');
                 var itemColor =  secondChart.data.datasets[0].backgroundColor; 
                 secondChart.data.labels.forEach(function(label, index){
+                    console.log(label)
+                    var label = label.replace("IPA - ", "")
                     ul.innerHTML += `
                     <li>
                         <div style='background-color: ${itemColor[index]}'></div><p class="legend-item">${label}</p>
