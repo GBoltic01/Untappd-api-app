@@ -1,9 +1,9 @@
 {% extends "index.html" %}
 {% block content %}
 
-<div class="wraper">
+<div class="wraper" style="padding-bottom: 20px;">
     <p class="brewery-name">{{ brewery_dictionary.name }}
-        <span class="untappd"><a target="_blank" href={{ brewery_dictionary.untappd_url }}>Untappd</a></span>
+        <span class="untappd"><a style="color:orange" target="_blank" href={{ brewery_dictionary.untappd_url }}>Untappd</a></span>
     </p>
     <hr>
     <table>
@@ -21,15 +21,17 @@
         </tr>
     </table>
     <hr>
-    <div class="split">
-        <div id="legend" class="legend"></div>
+    <div id="split" class="split">
+        
         <div id="parent">  
             <canvas id="mainChart"></canvas>
             <!-- <div id="image" class="image"></div> !-->
         </div>
+        <div id="legend" class="legend"></div>
     </div>
-        <div id="mapid" style="height: 250px; width:95%; margin:auto; border-radius:10px; margin-top:30px"></div>
+        <div id="mapid" style="height: 25vh; width:95%; margin:auto; border-radius:10px; margin-top:30px"></div>
 </div>
+<br>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
@@ -39,6 +41,6 @@
     var beer_dictionary = ['{{ beer_dictionary|tojson }}']
     var beer_image = '{{ brewery_dictionary.image }}'
 </script>
-<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=136p"></script>
+<script src="{{ url_for('static', filename='js/chart-map-1.js') }}?v=164"></script>
 
 {% endblock %}

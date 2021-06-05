@@ -16,10 +16,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- CSS STYLING -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=168">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}?v=34">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/searchbar.css') }}?v=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/searchbar1.css') }}?v=83">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}?v=00110">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/searchbar1.css') }}?v=125"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}?v=51">
     <!-- LEAFLET -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
@@ -39,27 +38,43 @@
 <body>
     <div class="orange-ribbon"></div>
     <div class="oranzna">
-        <label class="heading">About the project</label>
         <nav>
-            <label class="logo">BREWSEARCH</label>
-            <ul>
-                <li><a action="/" href="/">Search</a></li>
-                <li><a action="/about" href="/about">About</a></li>
-            </ul>
+            <div class="content-width">
+                <a action="/" href="/"><label class="logo">BREWSEARCH</label></a>
+                <ul>
+                    <li><a action="/" href="/">Search</a></li>
+                    <li><a action="/about" href="/about">About</a></li>
+                </ul>
+            </div>
         </nav>
+        <div class="content-width">
+            <header>
+                <h2>About the project</h2>
+            </header>
+        </div>
     </div>
 
-    <div class="about">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Aenean euismod elementum nisi quis eleifend quam adipiscing. A diam sollicitudin tempor id eu. Enim sed faucibus turpis in eu. 
-            Ac placerat vestibulum lectus mauris ultrices eros in cursus. Tempus iaculis urna id volutpat lacus laoreet non curabitur. 
-            Euismod nisi porta lorem mollis aliquam ut porttitor leo. Donec adipiscing tristique risus nec feugiat. 
-            Lectus urna duis convallis convallis tellus id interdum velit. Maecenas accumsan lacus vel facilisis volutpat est velit egestas. 
-         </p>
-         <h3>Get in touch</h3>
-         <p><b>Project developed by Woodpecker aka Gregor Boltic.<br></b> Get in touch if you have any questions, comments, reccommendations or if you experience any bugs or unusual behaviour of the website.<p>
-         <p><b>Design support, guidance and advice by ParaNorman Activity aka Norman Fiser.<br></b></p>  
+    <div class="wraper" style="margin-top:-30px; margin-bottom:20px">
+        <div class="about-text" style="margin:5%">
+            <p style="color:rgb(43, 43, 43)">
+
+                Craft breweries often follow different philosophies of brewing - while some breweries specialise in particular beer styles,
+                others are trying to keep their offer as diverse as possible. </br></br>
+
+                Brewsearch is a simple wee app that allows you to find a brewery and its' most popular beer styles. As beer styles are very broadly defined, 
+                you can explore each one further by clicking on one of the chart's sections- this will allow you to see the specific substyles that each brewery is focusing on. </br></br>
+
+                <b>Note: </b>The App uses Untappd's public API, meaning up to 50 most popular beers from each brewery can be displayed in the chart. Additionally, there is a possibility 
+                that 'Numer of beers' by each brewery is not correct as some collaboration beers might not be included in the total count. </br></br>
+
+                All data is sourced from Untappd.    
+            </p>
+            <h3 class="get-in-touch">Get in touch</h3>
+            <p style="margin-bottom:20px">If you have any questions, comments, or are experiencing any bugs or unusual behaviour with the app, please do get in touch.</p>
+            <a href="https://www.linkedin.com/in/gregor-bolti%C4%8D-9ab9b8157/" target="_blank"><span style="color:rgb(0, 114, 177)"><i class="fab fa-linkedin"></i></span> Gregor Boltic<br></a>
+            <span style="color:gray"><i class="fas fa-envelope"></i></span> gregor.boltic@gmail.com
+        </div>
     </div>
+
 </body>
 </html>

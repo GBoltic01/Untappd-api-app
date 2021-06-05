@@ -9,15 +9,13 @@ form {
 form.searchbar1 input[type=text] {
     padding-left: 20px;
     top: 50px;
+    color: rgb(43, 43, 43);
     height: 40px;
     width: 95%;
-    color: #afafaf;
-    background-color: #ffffff;
     border-radius: 20px;
-    border-width: 1px;
-    border-color: #afafaf;
+    border: 2px solid rgb(187, 187, 187);
     outline: none;
-    font-size: 16px;
+    margin-left: -5%;
 }
 
 form.searchbar1 button {
@@ -27,13 +25,21 @@ form.searchbar1 button {
     float: right;
     height: 40px;
     width: min(15%, 100px);
-    color: white;
     background-color:rgb(255, 153, 0);
     border-radius: 20px;
     border-color: transparent;
     outline: none;
-    font-size: 16px;
+    cursor: pointer;
+}
+
+#search-icon {
+    display: none;
+}
+
+#search-text {
+    font-size: 14px;
     text-align: center;
+    color: white;
 }
 
 @media (max-width: 720px) {
@@ -47,9 +53,11 @@ form.searchbar1 button {
         width: 15%;
         height: 30px;
         border-radius: 15px;
-        font-size: 12px;
         bottom: 30px;
         margin-left: 10px
+    }
+    #search-text {
+        font-size: 12px;
     }
 }
 
@@ -58,7 +66,15 @@ form.searchbar1 button {
         height: 30px;
         width: 30px;
         border-radius: 15px;
-        font-size: 0px;
+        
         bottom: 30px;
+    }
+    #search-icon {
+        display: inline-block;
+        position: relative;
+        bottom: 5px;
+    }
+    #search-text {
+        display: none;
     }
 }

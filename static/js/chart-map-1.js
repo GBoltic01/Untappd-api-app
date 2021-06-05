@@ -1,4 +1,7 @@
-const colorPalette = ['#d15e0e', '#f5751c', '#d6603a', '#2d4866', '#213651', '#17283c', '#797983']
+const colorPaletteDepricated = ['#d15e0e', '#f5751c', '#d6603a', '#2d4866', '#213651', '#17283c', '#797983']
+
+const colorPalette = ['#D15C0E', '#E8901A', '#F0B855', '#1A9EC8', '#007FA9', '#004F75', 'gray']
+
 var beerDict = JSON.parse(beer_dictionary)
 var beerCount = [
                  beerDict.ipa_count, 
@@ -56,7 +59,6 @@ createMainChart();
 
 
 // FUNCTION TO GENERATE SECOND CHART ON CLICK 
-
 function secondChart(e){
     var activePoints = mainChart.getElementsAtEvent(e);
     var selectedIndex = activePoints[0]._index;
@@ -68,17 +70,16 @@ function secondChart(e){
 
     var span = document.createElement('span')
     span.className = "back-arrow"
-    span.innerHTML = '<i id="back-arrow" class="fas fa-arrow-left"></i>'
-    document.getElementById("parent").appendChild(span)
+    span.innerHTML = '<i id="back-arrow" class="fas fa-arrow-left" style="color:orange; font-size:12px; display:flex;">  Back</i>'
+    $("#split").prepend(span);
 
     span.addEventListener("click", function() {
         secondChart.destroy();
         createMainChart();
     });
 
-
     // FUNCTION TO DISPLAY APPROPRIATE SUBSTYLE CHART ON CLICK
-
+    
     var values 
     var keys
 
@@ -115,15 +116,15 @@ function secondChart(e){
         };
     };
     substyleData() 
-
     var secondCanvas = document.getElementById("mainChart").getContext('2d');
+    const colorSchemeDeprcated = [
+        "#d15e0e", "#A0AEC1", "#213651", "#f5751c", "#FF9900", 
+        "#627894", "#2d4866", "#FA6121", "#d6603a", "#FFB739", 
+        "#DBE8F9", "#466289", "#17283c" ]
 
-    const colorScheme = [
-    "#d15e0e", "#A0AEC1", "#213651", "#f5751c", "#FF9900", 
-    "#627894", "#2d4866", "#FA6121", "#d6603a", "#FFB739", 
-    "#DBE8F9", "#466289", "#17283c"
-    ]
-    
+    const colorScheme = ['#D15C0E', '#DD7614', '#E8901A', '#F0B855', '#004F75', '#007FA9', '#1A9EC8', '#56BAD3',
+                         '#DD7614', '#ECA438', '#00678F', '#0D8FB9', '#38ACCE', 'gray' ]
+
     var secondChart = new Chart(secondCanvas, {
         type:'doughnut',
         data: {
@@ -146,7 +147,6 @@ function secondChart(e){
                 var ul = document.createElement('ul');
                 var itemColor =  secondChart.data.datasets[0].backgroundColor; 
                 secondChart.data.labels.forEach(function(label, index){
-                    console.log(label)
                     var label = label.replace("IPA - ", "")
                     ul.innerHTML += `
                     <li>
@@ -159,6 +159,7 @@ function secondChart(e){
     });
     legend.innerHTML = secondChart.generateLegend(); 
 };
+
 
 // LOAD BREWERY LOGO
 
